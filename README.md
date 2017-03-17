@@ -1,3 +1,3 @@
 # Warcaby:  Gra sieciowa
 
-autorstwa: Przemysław Poljańskiego i Aleksandra Zamojskiego
+autorstwa: Przemysława Poljańskiego i Aleksandra Zamojskiego
