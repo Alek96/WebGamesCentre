@@ -1,3 +1,3 @@
 # Szachy:  Gra sieciowa
 
-Authors: [Przemysław Poljański](@Peperzastey) i [Aleksander Zamojski](@Alek96)
+Authors: [Przemysław Poljański](https://github.com/Peperzastey "Peperzastey") i [Aleksander Zamojski](https://github.com/Alek96 "Alek96")
