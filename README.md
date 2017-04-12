@@ -1,3 +1,3 @@
 # Szachy:  Gra sieciowa
 
-autorstwa: Przemysława Poljańskiego i Aleksandra Zamojskiego
+Authors: [Przemysław Poljański](@Peperzastey) i [Aleksander Zamojski](@Alek96)
