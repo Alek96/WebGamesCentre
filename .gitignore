@@ -33,3 +33,5 @@
 
 # Not included folders
 VSProject/.vs/
+VSProject/WGCServer/Debug/
+VSProject/Debug/

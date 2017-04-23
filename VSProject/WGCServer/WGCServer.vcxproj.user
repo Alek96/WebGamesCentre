@@ -4,5 +4,7 @@
     <LocalDebuggerEnvironment>
     </LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <RemoteDebuggerCommand>
+    </RemoteDebuggerCommand>
   </PropertyGroup>
 </Project>
