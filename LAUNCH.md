@@ -15,5 +15,5 @@
       __NOTE:__ This config file __must__ have the same name as the executable file. Though, you can omit the `d` suffix, if the application          was built in _Debug_ configuration and has this suffix in its name.
 
 > This configuration file contains configuration of the server application, including:
-> * _server port number_,
-> * _the root directory of all web client's files_.
+> * _server port number_ - default: 8080,
+> * _the root directory of all web client's files_ - the server exits if not given.
