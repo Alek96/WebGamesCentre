@@ -1,8 +1,8 @@
 ## Visual Studio Project's Properties Configuration
 
 #### 1. Change the values of (or create) these 2 macros:
-* __PocoBase__, 
-* __WGCProjectBase__.
+* __PocoBase__ 
+* __WGCProjectBase__
 
 __PocoBase__ should point to the Poco C++ Libraries' base directory.  
 __WGCProjectBase__ should point to the root directory of this repo on your local machine.
@@ -17,13 +17,13 @@ Choose from options in curly brackets (`{}`) depending on your build configurati
 _WGCServer Property Pages > Configuration Properties_:
 * _\> C/C++ > General > Additional Include Directories_:  
  `$(WGCProjectBase)`  
- `$(PocoBase)Foundation\include\`  
- `$(PocoBase)Util\include\`  
- `$(PocoBase)Net\include\`  
- `$(PocoBase)JSON\include\`
+ `$(PocoBase)\Foundation\include`  
+ `$(PocoBase)\Util\include`  
+ `$(PocoBase)\Net\include`  
+ `$(PocoBase)\JSON\include`
 
 * _\> Linker > General > Additional Library Directories_:  
-	`$(PocoBase)lib\`
+	`$(PocoBase)\lib`
 
 Separate these entries by semicolons (;).
 

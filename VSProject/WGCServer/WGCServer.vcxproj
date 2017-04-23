@@ -87,10 +87,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)Foundation\include\;$(PocoBase)Util\include\;$(PocoBase)Net\include\;$(PocoBase)JSON\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)\Foundation\include;$(PocoBase)\Util\include;$(PocoBase)\Net\include;$(PocoBase)\JSON\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(PocoBase)lib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -98,10 +98,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)Foundation\include\;$(PocoBase)Util\include\;$(PocoBase)Net\include\;$(PocoBase)JSON\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(PocoBase)lib\</AdditionalLibraryDirectories>
       <AdditionalDependencies>PocoFoundationd.lib;PocoUtild.lib;PocoNetd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
