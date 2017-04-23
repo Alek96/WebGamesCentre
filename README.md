@@ -1,6 +1,6 @@
 # WebGamesCentre
-* A project for ZPR ('Advanced C++ Programming') classes at WUT *
-* Project title: Gra sieciowa - szachy *
+_A project for ZPR ('Advanced C++ Programming') classes at WUT_  
+_Project title: Gra sieciowa - szachy_
 
 Hosted game: **chess**.
 
