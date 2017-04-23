@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Not included folders
+VSProject/.vs/
