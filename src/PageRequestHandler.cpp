@@ -7,10 +7,6 @@
 
 //#include "Poco/Net/HTTPResponse.h"
 #include "Poco/Net/HTTPServerResponse.h"
-#include "Poco/StreamCopier.h"
-
-#include <fstream>
-#include <iostream>
 
 void PageRequestHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response)
 {
@@ -48,6 +44,14 @@ void PageRequestHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Po
 		std::string pageNotFound = resourceRootDir_ + "/html/not-found.html";
 		response.sendFile(pageNotFound, "text/html");
 	}
+
+	// @rzastey [TODO] Second logger for debugging (poco_debug).
+	poco_information(logger_, Poco::format(
+		"Response: %u %s.",
+		static_cast<unsigned>(response.getStatus()),
+		response.getReason()/*,
+		response.getDate().raw()*/
+	));
 }
 
 /*

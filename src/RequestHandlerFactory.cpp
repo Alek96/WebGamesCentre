@@ -1,5 +1,6 @@
 #include "WGC/Server/RequestHandlers/RequestHandlerFactory.h"
 #include "WGC/Server/RequestHandlers/PageRequestHandler.h"
+#include "WGC/Server/RequestHandlers/WebSocketRequestHandler.h"
 
 #include "Poco/Util/Application.h"
 
@@ -20,6 +21,14 @@ Poco::Net::HTTPRequestHandler * RequestHandlerFactory::createRequestHandler(cons
 		+ " "
 		+ request.getVersion()
 	);
+
+	/*for (auto it = request.begin(); it != request.end(); ++it)
+	{
+		poco_information(logger_, it->first + ": " + it->second);
+	}*/
+
+	if (request.find("Upgrade") != request.end() && Poco::icompare(request["Upgrade"], "websocket") == 0)
+		return new WebSocketRequestHandler;
 
 	std::string uri = request.getURI();
 
