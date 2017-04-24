@@ -2,8 +2,7 @@
 
 #### 0. Install required tools and libraries:
 * __[PocoLibrary](https://pocoproject.org/download/index.html "@pocoproject.org")__ 
-  Our version  2.7.13
-  We used 32 bit version
+  Version we used Poco 2.7.13 32 bit.
 * [__Boost.Test__](http://www.boost.org/ "@www.boost.org")
 * [__SCons__](http://scons.org/ "@scons.org")
 
