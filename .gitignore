@@ -37,4 +37,4 @@ VSProject/WGCServer/Debug/
 VSProject/Debug/
 
 # Files created after running SCons
-build/.sconsign.dblite
+*.sconsign.dblite

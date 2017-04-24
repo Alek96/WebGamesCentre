@@ -31,7 +31,9 @@
     <ClInclude Include="..\..\WGC\Server\Server.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\build\SConstruct.py" />
+    <None Include="SConstruct" />
+    <None Include="SConstruct-test.py" />
+    <None Include="SConstruct.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -84,7 +86,13 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>scons</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>scons -c &amp; scons</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>scons -c</NMakeCleanCommandLine>
+    <NMakeOutput>WGCServer.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

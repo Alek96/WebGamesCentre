@@ -46,7 +46,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\build\SConstruct.py">
+    <None Include="SConstruct">
+      <Filter>SCons</Filter>
+    </None>
+    <None Include="SConstruct.py">
+      <Filter>SCons</Filter>
+    </None>
+    <None Include="SConstruct-test.py">
       <Filter>SCons</Filter>
     </None>
   </ItemGroup>
