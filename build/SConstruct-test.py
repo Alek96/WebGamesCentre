@@ -4,7 +4,7 @@
 import SCons.Script
 from SCons.Environment import Environment
 
-print "Building Server"
+print "Building scons_test"
 
 env = Environment()   # Create an environmnet
 env.Program(target = "scons_test", source = ["scons_test.c"])
