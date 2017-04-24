@@ -30,6 +30,9 @@
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\WebSocketRequestHandler.h" />
     <ClInclude Include="..\..\WGC\Server\Server.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\build\SConstruct.py" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{9D6EFCD8-3A1D-45D7-8DA1-549417601215}</ProjectGuid>
