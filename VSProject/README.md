@@ -10,7 +10,7 @@
   During the instalation I had a few errors. Some of then: 
     I coudn't install Poco (1.7.8p2) 64 bit version, so we used 32 bit version. 
     SCons requires [Python](https://www.python.org/downloads/ "@python.org") 2 not 3. We installed 2.7.13.
-    SCons 2.7.13 is using Visual C++ 2015 compiler, so it is possible you need to install [Visual C++ 2015 Build Tools](https://blogs.msdn.microsoft.com/vcblog/2016/11/16/introducing-the-visual-studio-build-tools/ "@microsoft.com")
+    SCons 2.7.13 is using Visual C++ 2015 compiler, so it is possible you need to install [Visual C++ 2015 Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools "@landinghub.visualstudio.com")
 
 #### 1. Change the values of (or create) these 2 macros:
 * __PocoBase__ 
