@@ -31,30 +31,24 @@ if ARGUMENTS.get('debug') != '0':
         env.Append(LINKFLAGS = ['/DEBUG'])
         LibS = Split('PocoFoundationd PocoNetd PocoUtild PocoXMLd PocoJSONd')
     elif platform.name == 'posix':
+        env.Append(CCFLAGS='-std=c++11')
+        #env.Append(CCFLAGS=['-g'])
         LibS = Split('PocoFoundationd.so PocoNetd.so PocoUtild.so PocoXMLd.so PocoJSONd.so')
     else:
         print "Your platfor is not supported yet!"
         Exit(2)
-#I do not know if it is working
+
 else:
     env.Append(CPPDEFINES = ['NDEBUG'])
     variant = 'Release'
     if platform.name == 'win32':
+        env.Append(CCFLAGS='/MD')
         LibS = Split('PocoFoundation.lib PocoNet.lib PocoUtil.lib PocoXML.lib PocoJSON.lib')
     elif platform.name == 'posix':
         LibS = Split('PocoFoundation.so PocoNet.so PocoUtil.so PocoXML.so PocoJSON.so')
     else:
         print "Your platfor is not supported yet!"
         Exit(2)
-
-CCFlags = ['']
-if platform.name == 'win32':
-    CCFlags = ['']
-elif platform.name == 'posix':
-    CCFlags = ['-std=c++11']
-else:
-    print "Your platfor is not supported yet!"
-    Exit(2)
 
 
 print "Building: " + variant
@@ -77,8 +71,7 @@ t = env.Program(target = 'VSProject/Debug/WGCServer',
 				source = src_files, 
 				CPPPATH = [WGCProjectBase] + PocoHeaders,# + ['/usr/local/include'], #may be usefull
 				LIBS = LibS,
-				LIBPATH = PocoBase + '/lib')#, 
-				#CCFLAGS = CCFlags )
+				LIBPATH = PocoBase + '/lib')
 
 
 Default(t)
