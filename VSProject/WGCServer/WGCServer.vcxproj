@@ -22,9 +22,9 @@
     <ClCompile Include="..\..\src\PageRequestHandler.cpp" />
     <ClCompile Include="..\..\src\RequestHandlerFactory.cpp" />
     <ClCompile Include="..\..\src\class_test.cpp" />
+    <ClCompile Include="..\..\src\scons_test.cpp" />
     <ClCompile Include="..\..\src\Server.cpp" />
     <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp" />
-    <ClCompile Include="scons_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\WGC\header_test.h" />
