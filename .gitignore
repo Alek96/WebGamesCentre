@@ -38,3 +38,4 @@ VSProject/Debug/
 
 # Files created after running SCons
 *.sconsign.dblite
+*.pdb
