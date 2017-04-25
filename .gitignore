@@ -35,3 +35,7 @@
 VSProject/.vs/
 VSProject/WGCServer/Debug/
 VSProject/Debug/
+
+# Files created after running SCons
+*.sconsign.dblite
+*.pdb

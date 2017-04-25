@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="SCons">
+      <UniqueIdentifier>{4dc5223d-646b-4a99-a22a-d4c6e57a6311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SCons\test">
+      <UniqueIdentifier>{b750c24c-aae1-4c16-b391-a751da318e9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\PageRequestHandler.cpp">
@@ -21,11 +27,17 @@
     <ClCompile Include="..\..\src\RequestHandlerFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\class_test.cpp">
+      <Filter>SCons\test</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\scons_test.cpp">
+      <Filter>SCons\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +53,16 @@
     <ClInclude Include="..\..\WGC\Server\Server.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\WGC\header_test.h">
+      <Filter>SCons\test</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\SConstruct">
+      <Filter>SCons</Filter>
+    </None>
+    <None Include="..\..\SConstruct.py">
+      <Filter>SCons</Filter>
+    </None>
   </ItemGroup>
 </Project>
