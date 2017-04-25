@@ -18,29 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\PageRequestHandler.cpp" />
-    <ClCompile Include="..\..\src\RequestHandlerFactory.cpp" />
-    <ClCompile Include="..\..\src\class_test.cpp" />
-    <ClCompile Include="..\..\src\scons_test.cpp" />
-    <ClCompile Include="..\..\src\Server.cpp" />
-    <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\WGC\header_test.h" />
-    <ClInclude Include="..\..\WGC\Server\RequestHandlers\PageRequestHandler.h" />
-    <ClInclude Include="..\..\WGC\Server\RequestHandlers\RequestHandlerFactory.h" />
-    <ClInclude Include="..\..\WGC\Server\RequestHandlers\WebSocketRequestHandler.h" />
-    <ClInclude Include="..\..\WGC\Server\Server.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\SConstruct" />
-    <None Include="..\..\SConstruct.py" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{9D6EFCD8-3A1D-45D7-8DA1-549417601215}</ProjectGuid>
-    <RootNamespace>WGCServer</RootNamespace>
+    <ProjectGuid>{B5677D93-1EC5-4173-B366-1B237BC8B998}</ProjectGuid>
+    <RootNamespace>WGCServerTests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -58,7 +39,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Makefile</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -88,22 +69,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>scons -C ..\.. -Q debug=1</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>scons -C ..\.. -c &amp;&amp; scons -C ..\.. -Q debug=1</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>scons -C ..\.. -c</NMakeCleanCommandLine>
-    <NMakeOutput>..\Debug\WGCServer.exe</NMakeOutput>
-    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)\Foundation\include;$(PocoBase)\Util\include;$(PocoBase)\Net\include;$(PocoBase)\JSON\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PocoBase)\Foundation\include;$(PocoBase)\Net\include;$(PocoBase)\Util\include;$(WGCProjectBase);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(PocoBase)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -111,12 +86,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)\Foundation\include;$(PocoBase)\Util\include;$(PocoBase)\Net\include;$(PocoBase)\JSON\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WGCProjectBase);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(PocoBase)\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PocoFoundationd.lib;PocoUtild.lib;PocoNetd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -144,6 +115,18 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\PageRequestHandler.cpp" />
+    <ClCompile Include="..\..\src\RequestHandlerFactory.cpp" />
+    <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp" />
+    <ClCompile Include="..\..\tests\catchTest.cpp" />
+    <ClCompile Include="..\..\tests\RequestHandlerFactoryTest.cpp" />
+    <ClCompile Include="..\..\tests\testsMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\tests\dummies\HTTPServerRequestDummy.h" />
+    <ClInclude Include="..\..\tests\dummies\HTTPServerResponseDummy.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

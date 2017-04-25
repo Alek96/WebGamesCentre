@@ -14,8 +14,8 @@
 class WebSocketRequestHandler : public Poco::Net::HTTPRequestHandler
 {
 public:
-	WebSocketRequestHandler()
-		: logger_(Poco::Util::Application::instance().logger()) {}
+	WebSocketRequestHandler(Poco::Logger &logger = Poco::Util::Application::instance().logger())
+		: logger_(logger) {}
 
 	virtual void handleRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
 

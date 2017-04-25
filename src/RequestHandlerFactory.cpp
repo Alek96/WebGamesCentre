@@ -7,7 +7,6 @@
 #include "Poco/Net/HTTPServerRequest.h"
 
 #include <string>
-#include <iostream>
 
 
 Poco::Net::HTTPRequestHandler * RequestHandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest &request)
@@ -28,7 +27,7 @@ Poco::Net::HTTPRequestHandler * RequestHandlerFactory::createRequestHandler(cons
 	}*/
 
 	if (request.find("Upgrade") != request.end() && Poco::icompare(request["Upgrade"], "websocket") == 0)
-		return new WebSocketRequestHandler;
+		return new WebSocketRequestHandler(logger_);
 
 	std::string uri = request.getURI();
 
@@ -43,5 +42,5 @@ Poco::Net::HTTPRequestHandler * RequestHandlerFactory::createRequestHandler(cons
 	else if (extension == "html" || extension == "htm" || uri == "/")
 		MIMEtype = "text/html";
 
-	return new PageRequestHandler(MIMEtype, webFilesRoot_, uri);
+	return new PageRequestHandler(MIMEtype, webFilesRoot_, uri, logger_);
 }

@@ -16,10 +16,16 @@
 class PageRequestHandler : public Poco::Net::HTTPRequestHandler
 {
 public:
-	PageRequestHandler(const std::string &contentType, const std::string &resourceRootDir, const std::string &resourceName)
-		: contentType_(contentType), resourceRootDir_(resourceRootDir), resourceName_(resourceName), logger_(Poco::Util::Application::instance().logger()) {}
+	PageRequestHandler(const std::string &contentType, const std::string &resourceRootDir, const std::string &resourceName, Poco::Logger &logger = Poco::Util::Application::instance().logger())
+		: contentType_(contentType), resourceRootDir_(resourceRootDir), resourceName_(resourceName), logger_(logger) {}
 
 	virtual void handleRequest(Poco::Net::HTTPServerRequest &request, Poco::Net::HTTPServerResponse &response) override;
+
+	// getter for testing
+	const std::string& getContentType() const
+	{
+		return contentType_;
+	}
 
 protected:
 	std::string contentType_;
