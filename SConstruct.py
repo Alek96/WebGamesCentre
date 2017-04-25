@@ -62,8 +62,8 @@ if ARGUMENTS.get('debug') == '1':
 	#env.VariantDir('VSProject/Debug/', 'src', duplicate=0)	#not working ???
     
 	if platform.name == 'win32':
-		env.Append(CCFLAGS='/MDd')
-		env.Append(LINKFLAGS = ['/DEBUG'])
+		env.Append(CCFLAGS=['-W3', '-EHsc', '-D_DEBUG', '/MDd', '/Zi'])
+		env.Append(LINKFLAGS = ['/DEBUG', '/INCREMENTAL:NO'])
 		LibS = [ x + 'd.lib' for x in LibS]
 	elif platform.name == 'posix':
 		env.Append(CCFLAGS='-std=c++11')
@@ -79,7 +79,7 @@ else:
 	variant = 'Release'
 
 	if platform.name == 'win32':
-		env.Append(CCFLAGS='/MD')
+		env.Append(CCFLAGS=['-O2', '-EHsc', '-DNDEBUG', '/MD'])
 		LibS = [ x + '.lib' for x in LibS]
 	elif platform.name == 'posix':
 		#LibS = Split('PocoFoundation.so PocoNet.so PocoUtil.so PocoXML.so PocoJSON.so')
@@ -91,7 +91,6 @@ else:
 print "Building: " + variant
 env.Append(LIBS = LibS)
 env.Append(LIBPATH = PocoBase + '/lib')
-
 
 
 t = env.Program(target = 'VSProject/'+variant+'/WGCServer', source = srcFiles)
