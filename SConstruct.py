@@ -5,26 +5,38 @@ import SCons.Script
 from SCons.Environment import Environment
 import getpass
 
+
+env = Environment(TARGET_ARCH= 'x86')   # Create an environmnet for 32 bit version
+print "Building: WGCServer"
 print "User: " + getpass.getuser()
 
 #Alek Path for Windows
 if getpass.getuser() == 'Aleksander Zamojski':
-    PocoBase		= 'C:\\Libraries\\poco-1.7.8p2'
-    WGCProjectBase	= 'C:\\Users\\Aleksander\\Documents\\GitHub\\WebGamesCentre'
+	PocoBase		= 'C:\\Libraries\\poco-1.7.8p2'
 #Alek Path for Linux
 elif getpass.getuser() == 'alek':
-    PocoBase		= '/home/alek/Documents/poco-1.7.8p2'
-    WGCProjectBase	= '/home/alek/Desktop/ZPR/WebGamesCentre'
+	PocoBase		= '/home/alek/Documents/poco-1.7.8p2'
+#Przemek Path for Windows
+elif getpass.getuser() == 'Przemek':
+	PocoBase		= 'B:\\Poco C++ Libraries\\poco-1.7.8-all'
+#path to the main folder of Poco library
 else:
-    PocoBase		= '' #path to Poco library, the main folder
-    WGCProjectBase	= '' #path to project file
+	PocoBase		= ''
+	
+#WGCProjectBase	= '' #path to project file
+#WGCProjectBase	= 'C:\\Users\\Aleksander\\Documents\\GitHub\\WebGamesCentre'
+#WGCProjectBase	= '/home/alek/Desktop/ZPR/WebGamesCentre'
+WGCProjectBase	= '.'
+env.Append(CPPPATH = WGCProjectBase)
 
-print "Building: WGCServer"
 
-env = Environment(TARGET_ARCH= 'x86')   # Create an environmnet for 32 bit version
-
-platform = ARGUMENTS.get('OS', Platform())
-print "Platform: " + platform.name
+#source files
+srcFiles = Split('''src/PageRequestHandler.cpp
+					 src/RequestHandlerFactory.cpp
+					 src/Server.cpp
+					 src/WebSocketRequestHandler.cpp''')
+#src_files = ['src/scons_test.cpp', 'src/class_test.cpp']
+#consider to use Glob('*.c')
 
 LibS = Split('''PocoFoundation 
 				PocoNet 
@@ -32,9 +44,18 @@ LibS = Split('''PocoFoundation
 				PocoXML 
 				PocoJSON''')
 
+PocoHeaders = Split('''/Foundation/include
+					   /Util/include
+					   /Net/include
+					   /JSON/include''')
+PocoHeaders = [PocoBase + x for x in PocoHeaders]
+env.Append(CPPPATH = PocoHeaders)
+
+platform = ARGUMENTS.get('OS', Platform())
+print "Platform: " + platform.name
 
 # Debug Flags if debug=1 is specified on the command line
-if ARGUMENTS.get('debug') != '0':
+if ARGUMENTS.get('debug') == '1':
 	env.Append(CPPDEFINES = ['DEBUG', '_DEBUG'])
 	variant = 'Debug'
 	#env.Append(CCFLAGS=Split('/Zi /Fd${TARGET}.pdb'))
@@ -56,9 +77,9 @@ if ARGUMENTS.get('debug') != '0':
 else:
 	env.Append(CPPDEFINES = ['NDEBUG'])
 	variant = 'Release'
+
 	if platform.name == 'win32':
 		env.Append(CCFLAGS='/MD')
-		#LibS = Split('PocoFoundation.lib PocoNet.lib PocoUtil.lib PocoXML.lib PocoJSON.lib')
 		LibS = [ x + '.lib' for x in LibS]
 	elif platform.name == 'posix':
 		#LibS = Split('PocoFoundation.so PocoNet.so PocoUtil.so PocoXML.so PocoJSON.so')
@@ -67,32 +88,13 @@ else:
 		print "Your platfor is not supported yet!"
 		Exit(2)
 
+print "Building: " + variant
 env.Append(LIBS = LibS)
 env.Append(LIBPATH = PocoBase + '/lib')
 
-print "Building: " + variant
-
-#src_files = ['src/scons_test.cpp', 'src/class_test.cpp']
-#consider to use Glob('*.c')
-src_files = Split('''src/PageRequestHandler.cpp
-					 src/RequestHandlerFactory.cpp
-					 src/Server.cpp
-					 src/WebSocketRequestHandler.cpp''')
-
-PocoHeaders = Split('''/Foundation/include
-					   /Util/include
-					   /Net/include
-					   /JSON/include''')
-PocoHeaders = [PocoBase + x for x in PocoHeaders]
 
 
-t = env.Program(target = 'VSProject/Debug/WGCServer', 
-				source = src_files, 
-				CPPPATH = [WGCProjectBase] + PocoHeaders)#,# + ['/usr/local/include'], #may be usefull
-				#LIBS = LibS,
-				#LIBPATH = PocoBase + '/lib')
-
-
+t = env.Program(target = 'VSProject/'+variant+'/WGCServer', source = srcFiles)
 Default(t)
 
 #Check
