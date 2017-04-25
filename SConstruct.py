@@ -5,11 +5,11 @@ import SCons.Script
 from SCons.Environment import Environment
 
 #Alek Path for Windows
-#PocoBase		= 'C:\\Libraries\\poco-1.7.8p2'
-#WGCProjectBase	= 'C:\\Users\\Aleksander\\Documents\\GitHub\\WebGamesCentre'
+PocoBase		= 'C:\\Libraries\\poco-1.7.8p2'
+WGCProjectBase	= 'C:\\Users\\Aleksander\\Documents\\GitHub\\WebGamesCentre'
 #Alek PAth for Linux
-PocoBase		= '/home/alek/Documents/poco-1.7.8p2'
-WGCProjectBase	= '/home/alek/Desktop/ZPR/WebGamesCentre'
+#PocoBase		= '/home/alek/Documents/poco-1.7.8p2'
+#WGCProjectBase	= '/home/alek/Desktop/ZPR/WebGamesCentre'
 
 print "Building: WGCServer"
 
@@ -46,7 +46,15 @@ else:
     else:
         print "Your platfor is not supported yet!"
         Exit(2)
-    
+
+CCFlags = ['']
+if platform.name == 'win32':
+    CCFlags = ['']
+elif platform.name == 'posix':
+    CCFlags = ['-std=c++11']
+else:
+    print "Your platfor is not supported yet!"
+    Exit(2)
 
 
 print "Building: " + variant
@@ -69,8 +77,8 @@ t = env.Program(target = 'VSProject/Debug/WGCServer',
 				source = src_files, 
 				CPPPATH = [WGCProjectBase] + PocoHeaders,# + ['/usr/local/include'], #may be usefull
 				LIBS = LibS,
-				LIBPATH = PocoBase + '/lib', 
-				CCFLAGS = '-std=c++11' )
+				LIBPATH = PocoBase + '/lib')#, 
+				#CCFLAGS = CCFlags )
 
 
 Default(t)
