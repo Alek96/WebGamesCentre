@@ -16,6 +16,9 @@
     <Filter Include="SCons">
       <UniqueIdentifier>{4dc5223d-646b-4a99-a22a-d4c6e57a6311}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SCons\test">
+      <UniqueIdentifier>{b750c24c-aae1-4c16-b391-a751da318e9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\PageRequestHandler.cpp">
@@ -24,10 +27,16 @@
     <ClCompile Include="..\..\src\RequestHandlerFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Server.cpp">
+    <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp">
+    <ClCompile Include="scons_test.cpp">
+      <Filter>SCons\test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\class_test.cpp">
+      <Filter>SCons\test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,9 +53,15 @@
     <ClInclude Include="..\..\WGC\Server\Server.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\WGC\header_test.h">
+      <Filter>SCons\test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\build\SConstruct.py">
+    <None Include="..\..\SConstruct">
+      <Filter>SCons</Filter>
+    </None>
+    <None Include="..\..\SConstruct.py">
       <Filter>SCons</Filter>
     </None>
   </ItemGroup>

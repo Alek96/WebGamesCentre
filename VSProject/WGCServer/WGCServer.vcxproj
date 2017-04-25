@@ -21,17 +21,21 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\PageRequestHandler.cpp" />
     <ClCompile Include="..\..\src\RequestHandlerFactory.cpp" />
+    <ClCompile Include="..\..\src\class_test.cpp" />
     <ClCompile Include="..\..\src\Server.cpp" />
     <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp" />
+    <ClCompile Include="scons_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\WGC\header_test.h" />
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\PageRequestHandler.h" />
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\RequestHandlerFactory.h" />
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\WebSocketRequestHandler.h" />
     <ClInclude Include="..\..\WGC\Server\Server.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\build\SConstruct.py" />
+    <None Include="..\..\SConstruct" />
+    <None Include="..\..\SConstruct.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -41,7 +45,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -54,7 +58,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -84,7 +88,13 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>scons -C ..\.. -Q debug=1</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>scons -C ..\.. -c &amp;&amp; scons -C ..\.. -Q debug=1</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>scons -C ..\.. -c</NMakeCleanCommandLine>
+    <NMakeOutput>..\Debug\WGCServer.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
