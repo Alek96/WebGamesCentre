@@ -119,7 +119,6 @@
     <ClCompile Include="..\..\src\PageRequestHandler.cpp" />
     <ClCompile Include="..\..\src\RequestHandlerFactory.cpp" />
     <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp" />
-    <ClCompile Include="..\..\tests\catchTest.cpp" />
     <ClCompile Include="..\..\tests\RequestHandlerFactoryTest.cpp" />
     <ClCompile Include="..\..\tests\testsMain.cpp" />
   </ItemGroup>

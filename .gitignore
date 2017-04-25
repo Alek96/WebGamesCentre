@@ -34,6 +34,7 @@
 # Not included folders
 VSProject/.vs/
 VSProject/WGCServer/Debug/
+VSProject/WGCServerTests/Debug/
 VSProject/Debug/
 
 # Files created after running SCons
