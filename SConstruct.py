@@ -3,13 +3,21 @@
 # These import lines are not really needed, but it helps intellisense within VS when editing the script
 import SCons.Script
 from SCons.Environment import Environment
+import getpass
+
+print "User: " + getpass.getuser()
 
 #Alek Path for Windows
-PocoBase		= 'C:\\Libraries\\poco-1.7.8p2'
-WGCProjectBase	= 'C:\\Users\\Aleksander\\Documents\\GitHub\\WebGamesCentre'
-#Alek PAth for Linux
-#PocoBase		= '/home/alek/Documents/poco-1.7.8p2'
-#WGCProjectBase	= '/home/alek/Desktop/ZPR/WebGamesCentre'
+if getpass.getuser() == 'Aleksander Zamojski':
+    PocoBase		= 'C:\\Libraries\\poco-1.7.8p2'
+    WGCProjectBase	= 'C:\\Users\\Aleksander\\Documents\\GitHub\\WebGamesCentre'
+#Alek Path for Linux
+elif getpass.getuser() == 'alek':
+    PocoBase		= '/home/alek/Documents/poco-1.7.8p2'
+    WGCProjectBase	= '/home/alek/Desktop/ZPR/WebGamesCentre'
+else:
+    PocoBase		= '' #path to Poco library, the main folder
+    WGCProjectBase	= '' #path to project file
 
 print "Building: WGCServer"
 
@@ -32,7 +40,7 @@ if ARGUMENTS.get('debug') != '0':
         LibS = Split('PocoFoundationd PocoNetd PocoUtild PocoXMLd PocoJSONd')
     elif platform.name == 'posix':
         env.Append(CCFLAGS='-std=c++11')
-        #env.Append(CCFLAGS=['-g'])
+        env.Append(CCFLAGS='-g')
         LibS = Split('PocoFoundationd.so PocoNetd.so PocoUtild.so PocoXMLd.so PocoJSONd.so')
     else:
         print "Your platfor is not supported yet!"
