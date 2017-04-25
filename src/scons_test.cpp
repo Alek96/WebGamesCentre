@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <iostream>
-#include "WGC\header_test.h"
+#include "WGC/header_test.h"
 
-int main2() {
+int main() {
   printf("Hello World.");
   std::cin.get();
   return 0;
