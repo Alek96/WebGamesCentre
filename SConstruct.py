@@ -6,6 +6,7 @@ from SCons.Environment import Environment
 import getpass
 from shutil import copyfile
 import os.path
+import os
 
 env = Environment(TARGET_ARCH= 'x86')	# Create an environmnet for 32 bit version 
 
@@ -118,9 +119,16 @@ t = env.Program(target = targetPath, source = srcFiles)
 Default(t)
 
 #copy 
-if os.path.isfile('config\WGCServer.properties'):
-	copyfile('config\WGCServer.properties', 'VSProject/'+variant+'/WGCServer.properties')
-	print 'copy file WGCServer.properties'
+fPath = 'VSProject/'+variant+'/WGCServer.properties'
+if not env.GetOption('clean'):
+	if not os.path.exists(fPath):
+		if not os.path.exists('VSProject/'+variant):
+			os.makedirs('VSProject/'+variant)
+		copyfile('config\WGCServer.properties', fPath)
+		print 'copy file WGCServer.properties to ' +  variant
+elif os.path.exists(fPath):
+	os.remove(fPath)
+	print 'remove file WGCServer.properties from ' +  variant
 
 #Check
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Setting+Up+An+Application+-+Linux+-+Shoggoth&structure=Development
