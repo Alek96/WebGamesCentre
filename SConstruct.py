@@ -15,6 +15,7 @@ usage: scons [OPTION] ...
 SCons Options:
   debug=1               build the debug version
   VERBOSE=1             build with all information
+  testOff=1             turns off building unit tests
 """)
 
 if ARGUMENTS.get('VERBOSE') != '1':
@@ -43,11 +44,19 @@ env.Append(CPPPATH = WGCProjectBase)
 srcFiles = Split('''
 	src/PageRequestHandler.cpp
 	src/RequestHandlerFactory.cpp
-	src/Server.cpp
 	src/WebSocketRequestHandler.cpp
 	''')
+if ARGUMENTS.get('testOff') == '1':
+	srcFiles = srcFiles + ['src/Server.cpp']
+	#print "testOFF"
+else:
+	srcFiles = srcFiles + Split('''
+		tests/testsMain.cpp
+		tests/RequestHandlerFactoryTest.cpp
+		''')
 #src_files = ['src/scons_test.cpp', 'src/class_test.cpp']
 #consider to use Glob('*.c')
+#exit(1)
 
 LibS = Split('''
 	PocoFoundation 
@@ -100,7 +109,12 @@ else:	#posix and linux
 env.Append(LIBS = LibS)
 env.Append(LIBPATH = PocoBase + '/lib')
 
-t = env.Program(target = 'VSProject/'+variant+'/WGCServer', source = srcFiles)
+if ARGUMENTS.get('testOff') == '1':
+	targetPath = 'VSProject/'+variant+'/WGCServer'
+else:
+	targetPath = 'VSProject/'+variant+'/WGCServerTests'
+
+t = env.Program(target = targetPath, source = srcFiles)
 Default(t)
 
 #copy 
