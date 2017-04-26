@@ -33,9 +33,12 @@
 
 # Not included folders
 VSProject/.vs/
-VSProject/WGCServer/Debug/
-VSProject/WGCServerTests/Debug/
 VSProject/Debug/
+VSProject/Release/
+VSProject/WGCServer/Debug/
+VSProject/WGCServer/Release/
+VSProject/WGCServerTests/Debug/
+VSProject/WGCServerTests/Release/
 
 # Files created after running SCons
 *.sconsign.dblite

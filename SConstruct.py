@@ -4,7 +4,8 @@
 import SCons.Script
 from SCons.Environment import Environment
 import getpass
-
+from shutil import copyfile
+import os.path
 
 env = Environment(TARGET_ARCH= 'x86')	# Create an environmnet for 32 bit version 
 
@@ -101,6 +102,11 @@ env.Append(LIBPATH = PocoBase + '/lib')
 
 t = env.Program(target = 'VSProject/'+variant+'/WGCServer', source = srcFiles)
 Default(t)
+
+#copy 
+if os.path.isfile('config\WGCServer.properties'):
+	copyfile('config\WGCServer.properties', 'VSProject/'+variant+'/WGCServer.properties')
+	print 'copy file WGCServer.properties'
 
 #Check
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Setting+Up+An+Application+-+Linux+-+Shoggoth&structure=Development
