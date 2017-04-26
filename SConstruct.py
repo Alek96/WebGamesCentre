@@ -6,16 +6,15 @@ from SCons.Environment import Environment
 import getpass
 
 
-Help("""
-Type: 'scons'           to build the release program
-      'scons debug=1'   to build the debug version
-      'scons VERBOSE=1' to build with all information
-""")
-
-
 env = Environment(TARGET_ARCH= 'x86')	# Create an environmnet for 32 bit version 
-#print "Building: WGCServer"
-#print "User: " + getpass.getuser()
+
+Help("""
+usage: scons [OPTION] ...
+
+SCons Options:
+  debug=1               build the debug version
+  VERBOSE=1             build with all information
+""")
 
 if ARGUMENTS.get('VERBOSE') != '1':
 	env.Append(CCCOMSTR = 'Compiling $TARGET')
@@ -39,7 +38,6 @@ else:
 WGCProjectBase	= '.'
 env.Append(CPPPATH = WGCProjectBase)
 
-
 #source files
 srcFiles = Split('''
 	src/PageRequestHandler.cpp
@@ -47,7 +45,6 @@ srcFiles = Split('''
 	src/Server.cpp
 	src/WebSocketRequestHandler.cpp
 	''')
-#srcFiles = 'src/Server.cpp'
 #src_files = ['src/scons_test.cpp', 'src/class_test.cpp']
 #consider to use Glob('*.c')
 
@@ -70,13 +67,11 @@ env.Append(CPPPATH = PocoHeaders)
 
 platform = ARGUMENTS.get('OS', Platform())
 #mode = ARGUMENTS.get('mode', "release")
-#print "Platform: " + platform.name
 
 if ARGUMENTS.get('debug') == '1':
 	variant = 'Debug'
 else:
 	variant = 'Release'
-#print "Building: " + variant
 
 
 if platform.name == "win32":
@@ -101,10 +96,8 @@ else:	#posix and linux
 #env.Append(CCFLAGS=Split('/Zi /Fd${TARGET}.pdb'))
 #env.VariantDir('VSProject/Debug/', 'src', duplicate=0)	#not working ???
     
-
 env.Append(LIBS = LibS)
 env.Append(LIBPATH = PocoBase + '/lib')
-
 
 t = env.Program(target = 'VSProject/'+variant+'/WGCServer', source = srcFiles)
 Default(t)
