@@ -3,6 +3,7 @@
 # These import lines are not really needed, but it helps intellisense within VS when editing the script
 import SCons.Script
 from SCons.Environment import Environment
+# ---
 import getpass
 from shutil import copyfile
 import os.path
@@ -13,13 +14,17 @@ env = Environment(TARGET_ARCH= 'x86')	# Create an environmnet for 32 bit version
 Help("""
 usage: scons [OPTION] ...
 
-SCons Options:
+SCons Options (case insensitive):
   debug=1               build the debug version
   VERBOSE=1             build with all information
   testOff=1             turns off building unit tests
 """)
 
-if ARGUMENTS.get('VERBOSE') != '1':
+# keys to lower case (for case insensitiveness)
+ARGUMENTS = dict((k.lower(), v) for (k,v) in ARGUMENTS.items())
+# Generator expressions, see: https://www.python.org/dev/peps/pep-0289/
+
+if ARGUMENTS.get('verbose') != '1':
 	env.Append(CCCOMSTR = 'Compiling $TARGET')
 	env.Append(CXXCOMSTR = 'Compiling $TARGET')
 	env.Append(LINKCOMSTR = 'Linking $TARGET')
@@ -34,7 +39,9 @@ elif getpass.getuser() == 'alek':
 #Przemek Path for Windows
 elif getpass.getuser() == 'Przemek':
 	PocoBase = 'B:\\Poco C++ Libraries\\poco-1.7.8-all'
+	env.Append(ENV = os.environ)
 #path to the main folder of Poco library
+# ===== DEFINE HERE YOURS =====
 else:
 	PocoBase = ''
 	
@@ -42,19 +49,20 @@ WGCProjectBase	= '.'
 env.Append(CPPPATH = WGCProjectBase)
 
 #source files
-srcFiles = Split('''
+commonSrcFiles = Split('''
 	src/PageRequestHandler.cpp
 	src/RequestHandlerFactory.cpp
 	src/WebSocketRequestHandler.cpp
 	''')
-if ARGUMENTS.get('testOff') == '1':
-	srcFiles = srcFiles + ['src/Server.cpp']
-	#print "testOFF"
-else:
-	srcFiles = srcFiles + Split('''
+srcFiles = commonSrcFiles + ['src/Server.cpp']
+	
+if ARGUMENTS.get('testoff', '0') == '0':
+	testsSrcFiles = commonSrcFiles + Split('''
 		tests/testsMain.cpp
 		tests/RequestHandlerFactoryTest.cpp
 		''')
+	#print "testON"
+	
 #src_files = ['src/scons_test.cpp', 'src/class_test.cpp']
 #consider to use Glob('*.c')
 #exit(1)
@@ -76,7 +84,7 @@ PocoHeaders = Split('''
 PocoHeaders = [PocoBase + x for x in PocoHeaders]
 env.Append(CPPPATH = PocoHeaders)
 
-platform = ARGUMENTS.get('OS', Platform())
+platform = ARGUMENTS.get('os', Platform())
 #mode = ARGUMENTS.get('mode', "release")
 
 if ARGUMENTS.get('debug') == '1':
@@ -85,7 +93,7 @@ else:
 	variant = 'Release'
 
 
-if platform.name == "win32":
+if platform.name == 'win32':
 	if variant == 'Debug':
 		env.Append(CPPDEFINES = ['DEBUG', '_DEBUG'])
 		env.Append(CCFLAGS=['-W3', '-EHsc', '-D_DEBUG', '/MDd']) #'/Zi'
@@ -110,13 +118,16 @@ else:	#posix and linux
 env.Append(LIBS = LibS)
 env.Append(LIBPATH = PocoBase + '/lib')
 
-if ARGUMENTS.get('testOff') == '1':
-	targetPath = 'VSProject/'+variant+'/WGCServer'
-else:
-	targetPath = 'VSProject/'+variant+'/WGCServerTests'
+if ARGUMENTS.get('testoff', '0') == '0':
+	testsTargetPath = 'VSProject/'+variant+'/WGCServerTests'
+	tests = env.Program(target = testsTargetPath, source = testsSrcFiles)
+	Default(tests)	#prepend
 
-t = env.Program(target = targetPath, source = srcFiles)
-Default(t)
+targetPath = 'VSProject/'+variant+'/WGCServer'
+
+server = env.Program(target = targetPath, source = srcFiles)
+Default(server)
+# default targets, see: http://www.scons.org/doc/0.93/HTML/scons-user/c675.html
 
 #copy 
 fPath = 'VSProject/'+variant+'/WGCServer.properties'
