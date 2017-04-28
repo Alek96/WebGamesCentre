@@ -3,7 +3,7 @@
 *
 */
 
-#include "WGC/Server/RequestHandlers/WebSocketRequestHandler.h"
+#include "WebSocketRequestHandler.h"
 
 #include "Poco/Net/WebSocket.h"
 #include "Poco/Net/NetException.h"

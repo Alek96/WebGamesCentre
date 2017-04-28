@@ -2,8 +2,8 @@
  * WebGamesCentre Server's source
 */
 
-#include "WGC/Server/Server.h"
-#include "WGC/Server/RequestHandlers/RequestHandlerFactory.h"
+#include "Server.h"
+#include "RequestHandlers/RequestHandlerFactory.h"
 
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Net/HTTPServerParams.h"

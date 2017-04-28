@@ -3,7 +3,7 @@
  *
 */
 
-#include "WGC/Server/RequestHandlers/PageRequestHandler.h"
+#include "PageRequestHandler.h"
 
 //#include "Poco/Net/HTTPResponse.h"
 #include "Poco/Net/HTTPServerResponse.h"
