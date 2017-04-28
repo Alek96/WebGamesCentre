@@ -21,13 +21,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\PageRequestHandler.cpp" />
     <ClCompile Include="..\..\src\RequestHandlerFactory.cpp" />
-    <ClCompile Include="..\..\src\class_test.cpp" />
-    <ClCompile Include="..\..\src\scons_test.cpp" />
     <ClCompile Include="..\..\src\Server.cpp" />
     <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\WGC\header_test.h" />
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\PageRequestHandler.h" />
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\RequestHandlerFactory.h" />
     <ClInclude Include="..\..\WGC\Server\RequestHandlers\WebSocketRequestHandler.h" />
@@ -58,7 +55,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Makefile</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -125,9 +122,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+	  <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)\Foundation\include;$(PocoBase)\Util\include;$(PocoBase)\Net\include;$(PocoBase)\JSON\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib</AdditionalLibraryDirectories>
+	  <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -138,9 +137,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+	  <AdditionalIncludeDirectories>$(WGCProjectBase);$(PocoBase)\Foundation\include;$(PocoBase)\Util\include;$(PocoBase)\Net\include;$(PocoBase)\JSON\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib</AdditionalLibraryDirectories>
+	  <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
