@@ -30,14 +30,8 @@
     <ClCompile Include="..\..\src\WebSocketRequestHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\class_test.cpp">
-      <Filter>SCons\test</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Server.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\scons_test.cpp">
-      <Filter>SCons\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +46,6 @@
     </ClInclude>
     <ClInclude Include="..\..\WGC\Server\Server.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WGC\header_test.h">
-      <Filter>SCons\test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

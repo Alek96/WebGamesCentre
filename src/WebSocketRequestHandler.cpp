@@ -11,6 +11,9 @@
 
 using Poco::Net::WebSocket;
 
+/** IMPORTANT NOTE: For now it's only implementation stub. Not tested. 
+ *	!mayfail 
+*/
 void WebSocketRequestHandler::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response)
 {
 	try
@@ -18,7 +21,6 @@ void WebSocketRequestHandler::handleRequest(Poco::Net::HTTPServerRequest& reques
 		WebSocket ws(request, response);
 		poco_information(logger_, "WebSocket connection established.");
 
-		// @rzastey [TODO] Poco::Buffer
 		char buffer[1024];
 		int flags;
 		int n;

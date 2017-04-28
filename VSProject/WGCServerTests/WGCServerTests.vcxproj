@@ -86,8 +86,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WGCProjectBase);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PocoBase)\Foundation\include;$(PocoBase)\Net\include;$(PocoBase)\Util\include;$(WGCProjectBase);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+	<Link>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -96,9 +99,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+	  <AdditionalIncludeDirectories>$(PocoBase)\Foundation\include;$(PocoBase)\Net\include;$(PocoBase)\Util\include;$(WGCProjectBase);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	  <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -109,9 +114,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+	  <AdditionalIncludeDirectories>$(PocoBase)\Foundation\include;$(PocoBase)\Net\include;$(PocoBase)\Util\include;$(WGCProjectBase);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(PocoBase)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	  <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
