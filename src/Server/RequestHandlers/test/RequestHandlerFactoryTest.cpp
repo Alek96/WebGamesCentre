@@ -1,8 +1,8 @@
-#include "catch-framework/catch.hpp"
+#include "3rd-party/catch.hpp"
 #include "dummies/HTTPServerRequestDummy.h"
 
-#include "WGC/Server/RequestHandlers/RequestHandlerFactory.h"
-#include "WGC/Server/RequestHandlers/PageRequestHandler.h"
+#include "../RequestHandlerFactory.h"
+#include "../PageRequestHandler.h"
 #include "Poco/SharedPtr.h"
 #include "Poco/AutoPtr.h"
 #include "Poco/Logger.h"

@@ -1,6 +1,6 @@
-#include "WGC/Server/RequestHandlers/RequestHandlerFactory.h"
-#include "WGC/Server/RequestHandlers/PageRequestHandler.h"
-#include "WGC/Server/RequestHandlers/WebSocketRequestHandler.h"
+#include "RequestHandlerFactory.h"
+#include "PageRequestHandler.h"
+#include "WebSocketRequestHandler.h"
 
 #include "Poco/Util/Application.h"
 
