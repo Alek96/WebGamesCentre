@@ -4,69 +4,52 @@
 import SCons.Script
 from SCons.Environment import Environment
 # ---
-import getpass
 from shutil import copyfile
 import os.path
 import os
 
 env = Environment(TARGET_ARCH= 'x86')	# Create an environmnet for 32 bit version 
+# Make env global 
+Export('env')
 
-Help("""
+# This will be shown with flag -h
+Help('''
 usage: scons [OPTION] ...
 
 SCons Options (case insensitive):
-  debug=1               build the debug version
-  VERBOSE=1             build with all information
-  testOff=1             turns off building unit tests
-""")
+  release=1             Build the release version
+  verbose=1             Build with all information
 
-# keys to lower case (for case insensitiveness)
+ unit test:
+  test                  Build all unit tests
+  testName              Build single unit test called 'testName'
+  test=on               Turns on building unit tests (default)
+  test=off              Turns off building unit tests
+  test=all              Run all unit tests
+  test=testName         Run unit tests whose name contains 'testName'
+
+''')
+
+# Keys to lower case (for case insensitiveness)
 ARGUMENTS = dict((k.lower(), v) for (k,v) in ARGUMENTS.items())
 # Generator expressions, see: https://www.python.org/dev/peps/pep-0289/
 
+# Replace long comment for short version
 if ARGUMENTS.get('verbose') != '1':
-	env.Append(CCCOMSTR = 'Compiling $TARGET')
-	env.Append(CXXCOMSTR = 'Compiling $TARGET')
-	env.Append(LINKCOMSTR = 'Linking $TARGET')
+	env.Append(CCCOMSTR = ['Compiling $TARGET'])
+	env.Append(CXXCOMSTR = ['Compiling $TARGET'])
+	env.Append(LINKCOMSTR = ['Linking $TARGET'])
 
+# Run PocoDir.py for configuration
+SConscript('config/PocoDir.py')
+PocoBase = env['POCOBASE']
 
-#Alek Path for Windows
-if getpass.getuser() == 'Aleksander Zamojski':
-	PocoBase = 'C:\\Libraries\\poco-1.7.8p2'
-#Alek Path for Linux
-elif getpass.getuser() == 'alek':
-	PocoBase = '/home/alek/Documents/poco-1.7.8p2'
-#Przemek Path for Windows
-elif getpass.getuser() == 'Przemek':
-	PocoBase = 'B:\\Poco C++ Libraries\\poco-1.7.8-all'
-	env.Append(ENV = os.environ)
-#path to the main folder of Poco library
-# ===== DEFINE HERE YOURS =====
-else:
-	PocoBase = ''
-	
-WGCProjectBase	= '.'
+# Get current path
+WGCProjectBase = [os.getcwd()]
 env.Append(CPPPATH = WGCProjectBase)
 
-#source files
-commonSrcFiles = Split('''
-	src/PageRequestHandler.cpp
-	src/RequestHandlerFactory.cpp
-	src/WebSocketRequestHandler.cpp
-	''')
-srcFiles = commonSrcFiles + ['src/Server.cpp']
-	
-if ARGUMENTS.get('testoff', '0') == '0':
-	testsSrcFiles = commonSrcFiles + Split('''
-		tests/testsMain.cpp
-		tests/RequestHandlerFactoryTest.cpp
-		''')
-	#print "testON"
-	
-#src_files = ['src/scons_test.cpp', 'src/class_test.cpp']
-#consider to use Glob('*.c')
-#exit(1)
-
+# Names of the libraries. 
+# Letter 'd' for debug, and suffix .lib or .so will be added automatically
 LibS = Split('''
 	PocoFoundation 
 	PocoNet 
@@ -75,6 +58,7 @@ LibS = Split('''
 	PocoJSON
 	''')
 
+# Path in PocoBase directory where can be found header files
 PocoHeaders = Split('''
 	/Foundation/include
 	/Util/include
@@ -84,62 +68,46 @@ PocoHeaders = Split('''
 PocoHeaders = [PocoBase + x for x in PocoHeaders]
 env.Append(CPPPATH = PocoHeaders)
 
+# Detect the build mode
 platform = ARGUMENTS.get('os', Platform())
-#mode = ARGUMENTS.get('mode', "release")
-
-if ARGUMENTS.get('debug') == '1':
-	variant = 'Debug'
-else:
+if ARGUMENTS.get('release', '0') == '1':
 	variant = 'Release'
+else:
+	variant = 'Debug'
 
-
+# Add flags for detected platform and build mode
 if platform.name == 'win32':
 	if variant == 'Debug':
 		env.Append(CPPDEFINES = ['DEBUG', '_DEBUG'])
-		env.Append(CCFLAGS=['-W3', '-EHsc', '-D_DEBUG', '/MDd']) #'/Zi'
+		env.Append(CCFLAGS=['-W3', '-EHsc', '-D_DEBUG', '/MDd', '/Z7'])
+		#env.Append(CCPDBFLAGS=['/Zi', '/Fd${TARGET}.pdb'])
 		env.Append(LINKFLAGS = ['/DEBUG', '/INCREMENTAL:NO'])
 		LibS = [ x + 'd.lib' for x in LibS]
 	else:
 		env.Append(CPPDEFINES = ['NDEBUG'])
 		env.Append(CCFLAGS=['-O2', '-EHsc', '-DNDEBUG', '/MD'])
 		LibS = [ x + '.lib' for x in LibS]
-
 else:	#posix and linux
-	env.Append(CCFLAGS='-std=c++11')
+	env.Append(CCFLAGS=['-std=c++14'])
 	if variant == 'Debug':
-		env.Append(CCFLAGS='-g')
+		env.Append(CCFLAGS=['-g'])
 		LibS = [ x + 'd.so' for x in LibS]
 	else:
 		LibS = [ x + '.so' for x in LibS]
 
-#env.Append(CCFLAGS=Split('/Zi /Fd${TARGET}.pdb'))
-#env.VariantDir('VSProject/Debug/', 'src', duplicate=0)	#not working ???
-    
 env.Append(LIBS = LibS)
-env.Append(LIBPATH = PocoBase + '/lib')
+env.Append(LIBPATH = [PocoBase + '/lib'])
 
-if ARGUMENTS.get('testoff', '0') == '0':
-	testsTargetPath = 'VSProject/'+variant+'/WGCServerTests'
-	tests = env.Program(target = testsTargetPath, source = testsSrcFiles)
-	Default(tests)	#prepend
+# Initial unit test
+testEnv = env.Clone()
+Export('testEnv')
+# Add new tool, that can be found in src/Server/unitTest.py
+testEnv.Tool('unitTest',
+	toolpath=['src/Server'],
+	UTEST_MAIN_SRC=File('build/'+variant+'/testsMain.obj'))
+# Save argument in testEnv
+testEnv.SetDefault(test = [ARGUMENTS.get('test', 'on')])
 
-targetPath = 'VSProject/'+variant+'/WGCServer'
-
-server = env.Program(target = targetPath, source = srcFiles)
-Default(server)
-# default targets, see: http://www.scons.org/doc/0.93/HTML/scons-user/c675.html
-
-#copy 
-fPath = 'VSProject/'+variant+'/WGCServer.properties'
-if not env.GetOption('clean'):
-	if not os.path.exists(fPath):
-		if not os.path.exists('VSProject/'+variant):
-			os.makedirs('VSProject/'+variant)
-		copyfile('config\WGCServer.properties', fPath)
-		print 'copy file WGCServer.properties to ' +  variant
-elif os.path.exists(fPath):
-	os.remove(fPath)
-	print 'remove file WGCServer.properties from ' +  variant
-
-#Check
-#http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Setting+Up+An+Application+-+Linux+-+Shoggoth&structure=Development
+# Hierarchical Builds
+if not GetOption('help'):
+	env.SConscript('src/Server/SConscript.py', variant_dir='build/'+variant, duplicate=0)
