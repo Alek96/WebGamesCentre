@@ -39,6 +39,9 @@ VSProject/WGCServer/Debug/
 VSProject/WGCServer/Release/
 VSProject/WGCServerTests/Debug/
 VSProject/WGCServerTests/Release/
+bin/
+build/
+
 
 # Files created after running SCons
 *.sconsign.dblite
