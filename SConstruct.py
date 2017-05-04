@@ -34,11 +34,24 @@ SCons Options (case insensitive):
 ARGUMENTS = dict((k.lower(), v) for (k,v) in ARGUMENTS.items())
 # Generator expressions, see: https://www.python.org/dev/peps/pep-0289/
 
+class bcolors:
+	CYAN = '\033[36m'
+	LRED = '\033[91m'
+	LGREEN = '\033[92m'
+	LYELLOW = '\033[93m'
+	LBLUE = '\033[94m'
+	LMAGENTA = '\033[95m'
+	LCYAN = '\033[96m'
+	ENDC = '\033[0m'
+	BOLD = '\033[1m'
+	UNDERLINE = '\033[4m'
+
 # Replace long comment for short version
 if ARGUMENTS.get('verbose') != '1':
-	env.Append(CCCOMSTR = ['Compiling $TARGET'])
-	env.Append(CXXCOMSTR = ['Compiling $TARGET'])
-	env.Append(LINKCOMSTR = ['Linking $TARGET'])
+	env.Append(CCCOMSTR =   [bcolors.CYAN + 'Compiling '  + bcolors.ENDC + '$TARGET'])
+	env.Append(CXXCOMSTR =  [bcolors.CYAN + 'Compiling '  + bcolors.ENDC + '$TARGET'])
+	env.Append(ARCOMSTR =   [bcolors.LCYAN + 'Archiving ' + bcolors.ENDC + '$TARGET'])
+	env.Append(LINKCOMSTR = [bcolors.LBLUE + 'Linking '   + bcolors.ENDC + '$TARGET'])
 
 # Run PocoDir.py for configuration
 SConscript('config/PocoDir.py')
@@ -89,6 +102,7 @@ if platform.name == 'win32':
 		LibS = [ x + '.lib' for x in LibS]
 else:	#posix and linux
 	env.Append(CCFLAGS=['-std=c++14'])
+	env.Append(ARFLAGS=['-T'])
 	if variant == 'Debug':
 		env.Append(CCFLAGS=['-g'])
 		LibS = [ x + 'd.so' for x in LibS]
@@ -101,10 +115,7 @@ env.Append(LIBPATH = [PocoBase + '/lib'])
 # Initial unit test
 testEnv = env.Clone()
 Export('testEnv')
-# Add new tool, that can be found in src/Server/unitTest.py
-testEnv.Tool('unitTest',
-	toolpath=['src/Server'],
-	UTEST_MAIN_SRC=File('build/'+variant+'/testsMain.obj'))
+testEnv.SConscript('src/Server/UnitTest/SConscript.py', variant_dir='build/'+variant+'/UnitTest', duplicate=0)
 # Save argument in testEnv
 testEnv.SetDefault(test = [ARGUMENTS.get('test', 'on')])
 

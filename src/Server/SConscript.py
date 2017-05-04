@@ -10,14 +10,11 @@ libFiles = SConscript(Split('''
 	RequestHandlers/SConscript.py
 	'''))
 
-#Make new library
-libFiles = Library('Server', libFiles)
-
 #Load and Compile main
 objFiles = env.Object('Server.cpp')
 
-#Load and Compile testsMain
-objTestMain = env.Object('testsMain.cpp')
+#Make new library
+libFiles = env.Library('Server', libFiles)
 
 #Link program
-env.Program(target = '#bin/WGCServer', source =  objFiles + libFiles)
+env.Program(target = '#bin/WGCServer', source = objFiles + libFiles)
