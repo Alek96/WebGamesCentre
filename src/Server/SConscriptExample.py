@@ -12,21 +12,20 @@ objFiles = env.Object(srcFiles)
 
 # Unit tests
 Import('testEnv')
-testEnv = testEnv.Clone()
 # Add file with unit tests
-test = testEnv.addUnitTest(['test/...Test.cpp'] + objFiles)
+testEnv.addUnitTest(['test/...Test.cpp'] + objFiles)
 # or
-test = testEnv.addUnitTest(target = '#bin/...Test', source = ['test/...Test.cpp'] + objFiles)
+testEnv.addUnitTest(target = '#bin/...Test', source = ['test/...Test.cpp'] + objFiles)
 
 # Run SConscript files
 libFiles = SConscript(Split('''
 	Directory/SConscript.py
 	'''))
 
-# Get the name of current directory
+# Get the name of current directory, which will be the default name for the library
 dirPath = os.getcwd()
 dirName = os.path.basename(dirPath)
 
 # Rename the new library if you do not want a default name
-libFiles = Library(dirName, objFiles + libFiles)
+libFiles = env.Library(dirName, objFiles + libFiles)
 Return('libFiles')

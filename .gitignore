@@ -31,18 +31,13 @@
 *.out
 *.app
 
-# Not included folders
-VSProject/.vs/
-VSProject/Debug/
-VSProject/Release/
-VSProject/WGCServer/Debug/
-VSProject/WGCServer/Release/
-VSProject/WGCServerTests/Debug/
-VSProject/WGCServerTests/Release/
+# Directories created while building with SCons
 bin/
 build/
-
 
 # Files created after running SCons
 *.sconsign.dblite
 *.pdb
+
+# SCons config file (environment-specific)
+config/PocoDir.py
