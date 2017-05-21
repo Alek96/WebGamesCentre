@@ -13,6 +13,8 @@ void PageRequestHandler::handleRequest(Poco::Net::HTTPServerRequest &request, Po
 	//response.setChunkedTransferEncoding(true);
 	//response.setContentType(contentType_);
 
+	// MAYBE, TODO add no-cache?
+
 	if (contentType_ == "")
 	{ 
 		response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_NOT_FOUND);
