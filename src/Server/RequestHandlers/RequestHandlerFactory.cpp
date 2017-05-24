@@ -41,6 +41,10 @@ Poco::Net::HTTPRequestHandler * RequestHandlerFactory::createRequestHandler(cons
 		MIMEtype = "text/javascript";
 	else if (extension == "html" || extension == "htm" || uri == "/")
 		MIMEtype = "text/html";
+	else if (extension == "png")
+		MIMEtype = "image/png";
+	else if (extension == "map")
+		MIMEtype = "application/json";
 
 	return new PageRequestHandler(MIMEtype, webFilesRoot_, uri, logger_);
 }
