@@ -1,7 +1,20 @@
+roomInit();
 
-console.log("Initialize roominit");
+function roomInit() {
+    console.log("Initialize lobbyInit");
+    var NumberOfFilesToLoad = 3;
+    var firstState = 'LobbyBoot';
 
-loadFile("lobby/lobbyLoad.js", callFunction, ['addState', 'LobbyLoad', 'lobbyLoad']);
-loadFile("lobby/lobby.js", callFunction, ['addState', 'Lobby', 'lobby']);
+    loadFile("lobby/lobbyBoot.js", function () { afterLoading('LobbyBoot', 'lobbyBoot'); });
+    loadFile("lobby/lobbyLoad.js", function () { afterLoading('LobbyLoad', 'lobbyLoad'); });
+    loadFile("lobby/lobby.js", function () { afterLoading('Lobby', 'lobby'); });
 
-loadFile("lobby/lobbyBoot.js", callFunction, ['addState', 'LobbyBoot', 'lobbyBoot', true]); //must be the last one
+    function afterLoading(stateName, functionName) {
+        addState(stateName, functionName);
+        NumberOfFilesToLoad--;
+        if (NumberOfFilesToLoad === 0) {
+            console.log("Start state: " + firstState);
+            this.game.state.start(firstState);
+        }
+    }
+}

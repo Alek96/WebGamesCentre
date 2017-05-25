@@ -4,31 +4,57 @@ var room = function (game) {
 };
 
 room.prototype = {
-    startButton: null,
+    parent: null,
+    buttonsInfo: {},
 
     preload: function () {
         console.log("Enter room");
     },
     create: function () {
-        this.startButton = game.add.button(100, 50, 'TableButton', this.openTable, this, 1, 0, 2);
-        this.startButton.anchor.set(0.5);
-        this.startButton = game.add.button(75, game.world.height-30, 'BackButton', this.openBack, this, 1, 0, 2);
-        this.startButton.anchor.set(0.5);
+        this.buttons = game.add.group();
+        this.__proto__.parent = this;
+
+        this.buttons.add(TextButton(game.world.width / 8, game.world.height - 30, "Back", this.openBack, this));
+        this.buttons.add(TextButton(game.world.width / 2, game.world.height - 30, "New game", this.openNewGame, this));
+        this.buttons.add(TextButton(game.world.width * 7 / 8, game.world.height - 30, "Make game", this.openMakeGame, this));
+        this.buttons.add(TextButton(100, 50, "TableTest", this.openTest, this));
+        this.buttons.add(TextButton(100, 90, "TableTest", this.openTest, this));
+
+        this.buttonsInit();
     },
     update: function () {},
     shutdown: function () {
         console.log("Leave room");
     },
 
-    openTable: function () {
-        //alert("Game!!")
-        this.startButton = game.add.button(200, game.world.height / 2, 'BackButton', this.openTable, this, 1, 0, 2);
-        //loadFile("arkanoid/arkanoid.js", this.open);
+    openTest: function () {
+        alert("Test!");
     },
     openBack: function () {
         game.state.start('LobbyBoot');
     },
-    open: function () {
-        game.state.start(state);
+    openMakeGame: function () {
+        room.prototype.addTableButton();
+    },
+    openNewGame: function () {
+        room.prototype.addTableButton();
+        room.prototype.openEnterGame();
+    },
+    openEnterGame: function () {
+        loadFile("arkanoid/arkanoidInit.js", callFunction, ['arkanoidInit']);
+    },
+
+
+    buttonsInit: function () {
+        this.__proto__.buttonsInfo = {
+            width: 100,
+            height: 130,
+            space: 40
+        };
+        //Load information from the server and add to the buttons
+    },
+    addTableButton: function () {
+        this.parent.buttons.add(TextButton(100, this.buttonsInfo.height, "Table", this.openEnterGame, this.parent));
+        this.buttonsInfo.height += this.buttonsInfo.space;
     }
-}
+};

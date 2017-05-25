@@ -6,17 +6,20 @@ var lobby = function (game) {
 lobby.prototype = {
     i: 0,
     text: '',
-    startButton: null,
+    buttons: null,
 
     preload: function () {
         console.log("Enter lobby");
     },
     create: function () {
+        this.buttons = game.add.group();
+
+        this.buttons.add(TextButton(200, 50, "Arkanoid - TextButton", this.openArkanoid, this));
+        this.buttons.add(new LabelButton(game, 200, 90, "ButtonBackground", "Arkanoid - LabelButton", this.openArkanoid, this));
+
         var textStyle = { font: '18px Arial', fill: '#0095DD' };
         this.text = game.add.text(game.world.width - 5, 5, 'i: 0', textStyle);
         this.text.anchor.set(1, 0);
-        this.startButton = game.add.button(100, 50, 'arkanoidButton', this.openArkanoid, this, 1, 0, 2);
-        this.startButton.anchor.set(0.5);
     },
     update: function () {
         this.i++;
@@ -29,4 +32,4 @@ lobby.prototype = {
     openArkanoid: function () {
         loadFile("room/roomInit.js", callFunction, ['roomInit']);
     }
-}
+};
