@@ -1,5 +1,5 @@
 
-var roomInit = function (game) {
+var roomInit = function (gameName) {
     console.log("Initialize roomInit");
     var NumberOfFilesToLoad = 3;
     var firstState = 'RoomBoot';
@@ -13,7 +13,8 @@ var roomInit = function (game) {
         NumberOfFilesToLoad--;
         if (NumberOfFilesToLoad === 0) {
             console.log("Start state: " + firstState);
-            this.game.state.start(firstState);
+            room.prototype.gameName = gameName;
+            game.state.start(firstState);
         }
     }
 };

@@ -72,21 +72,32 @@ LabelButton.prototype.setLabel = function (label) {
 };//np. this.btnStart = new LabelButton(this.game, 480, 512, "buttonsprite", "Start game!", this.doBtnStartHandler, this, 1, 0, 2);
 
 var TextButton = function (x, y, text, callback, callbackContext, textStyle) {
-    var style = (textStyle == undefined ? { font: '26px Arial', fill: '#black' } : textStyle);
+    var style = (textStyle == undefined ? { font: '40px Arial', fill: '#black' } : textStyle);
     var text = game.add.text(x, y, text, style);
     text.anchor.set(0.5, 0.5);
-    text.inputEnabled = true;
-    text.input.useHandCursor = true;
     if (callback) {
+        text.inputEnabled = true;
+        text.input.useHandCursor = true;
+
         //run the function only when the pointer is over text
-        text.events.onInputUp.add(function () {
+        text.events.onInputUp.add(function (arg) {
             if (text.input.pointerOver())
-                callback();
+                callback.call(callbackContext, arg);
         }, callbackContext);
+        
+        text.events.onInputOut.add(function () { text.setShadow(0, 0, 'rgba(0,0,0,0.5)', 0); }, callbackContext);
+        text.events.onInputOver.add(function () { text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 5); }, callbackContext);
+        text.events.onInputDown.add(function () { text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 10); }, callbackContext);
     }
 
-    text.events.onInputOut.add(function () { text.setShadow(0, 0, 'rgba(0,0,0,0.5)', 0); }, callbackContext);
-    text.events.onInputOver.add(function () { text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 5); }, callbackContext);
-    text.events.onInputDown.add(function () { text.setShadow(2, 2, 'rgba(0,0,0,0.5)', 10); }, callbackContext);
     return text;
+}
+
+//Upper case first char at string
+var UpperCaseFirstLetter = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+//Lower case first char at string
+var LowerCaseFirstLetter = function (string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
 }

@@ -6,7 +6,6 @@ var lobbyLoad = function (game) {
 lobbyLoad.prototype = {
     preload: function () {
         console.log("Enter lobbyLoad");
-        game.load.spritesheet('ButtonBackground', 'img/ButtonBackground.png', 20, 20);
     },
     create: function () {
         game.state.start("Lobby");

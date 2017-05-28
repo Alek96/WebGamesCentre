@@ -14,8 +14,10 @@ lobby.prototype = {
     create: function () {
         this.buttons = game.add.group();
 
-        this.buttons.add(TextButton(200, 50, "Arkanoid - TextButton", this.openArkanoid, this));
-        this.buttons.add(new LabelButton(game, 200, 90, "ButtonBackground", "Arkanoid - LabelButton", this.openArkanoid, this));
+        this.buttons.add(TextButton(game.world.width / 2, 100, 'WebGamesCentre', undefined, undefined, { font: '80px Arial', fill: '#black' }));
+
+        this.buttons.add(TextButton(game.world.width / 2, game.world.height * 3 / 8, "Arkanoid", this.openArkanoid, this));
+        this.buttons.add(TextButton(game.world.width / 2, game.world.height * 5 / 8, "Chess", this.openChess, this));
 
         var textStyle = { font: '18px Arial', fill: '#0095DD' };
         this.text = game.add.text(game.world.width - 5, 5, 'i: 0', textStyle);
@@ -30,6 +32,9 @@ lobby.prototype = {
     },
 
     openArkanoid: function () {
-        loadFile("room/roomInit.js", callFunction, ['roomInit']);
+        loadFile("room/roomInit.js", callFunction, ['roomInit', 'Arkanoid']);
+    },
+    openChess: function () {
+        loadFile("room/roomInit.js", callFunction, ['roomInit', 'Chess']);
     }
 };
