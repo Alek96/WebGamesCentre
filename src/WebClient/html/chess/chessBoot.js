@@ -8,7 +8,7 @@ chessBoot.prototype = {
         console.log("Enter roomBoot");
     },
     create: function () {
-        game.scale.setGameSize(2400, 2400);
+        game.scale.setGameSize(2700, 2400);
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.pageAlignHorizontally = true;
         game.scale.pageAlignVertically = true;

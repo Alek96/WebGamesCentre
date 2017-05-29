@@ -32,7 +32,7 @@ lobby.prototype = {
     },
 
     openArkanoid: function () {
-        loadFile("room/roomInit.js", callFunction, ['roomInit', 'Arkanoid']);
+        loadFile("arkanoid/arkanoidInit.js", callFunction, ['arkanoidInit']);
     },
     openChess: function () {
         loadFile("room/roomInit.js", callFunction, ['roomInit', 'Chess']);

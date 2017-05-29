@@ -21,7 +21,7 @@ room.prototype = {
         this.buttons = game.add.group();
         this.__proto__.parent = this;
         //this.__proto__.gameName = lobby.__proto__.gameName;
-        this.buttons.add(TextButton(game.world.width / 2, 80, this.__proto__.gameName, undefined, undefined, { font: '80px Arial', fill: '#black' }));
+        this.buttons.add(TextButton(game.world.width / 2, 80, "Chess", undefined, undefined, { font: '80px Arial', fill: '#black' }));
 
         this.buttons.add(TextButton(game.world.width / 8, game.world.height - 30, "Back", this.openBack, this));
         this.buttons.add(TextButton(game.world.width / 2, game.world.height - 30, "New game", this.openNewGame, this));
@@ -53,8 +53,7 @@ room.prototype = {
         room.prototype.openEnterGame();
     },
     openEnterGame: function () {
-        var smallName = LowerCaseFirstLetter(room.prototype.gameName);
-        loadFile(smallName + '/' + smallName + 'Init.js', callFunction, [smallName + 'Init']);
+        loadFile("chess/chessInit.js", callFunction, ['chessInit']);
     },
 
 

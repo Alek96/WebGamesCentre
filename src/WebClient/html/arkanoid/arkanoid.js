@@ -6,7 +6,7 @@ var arkanoid = function (game) {
 arkanoid.prototype = {
     init: function () {
         this.__proto__.score = 0;
-        this.__proto__.lives = 1;
+        this.__proto__.lives = 3;
         this.__proto__.playing = false; 
 
         this.__proto__.brickInfo = {
@@ -132,6 +132,6 @@ arkanoid.prototype = {
     },
 
     openBack: function () {
-        game.state.start('RoomBoot');
+        game.state.start('LobbyBoot');
     },
 };
