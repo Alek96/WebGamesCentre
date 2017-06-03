@@ -21,4 +21,9 @@ dirName = os.path.basename(dirPath)
 
 # Make new library
 libFiles = env.Library(dirName, objFiles)
+
+# Add this librares to global values
+env.SetDefault(GAMESLIB = libFiles)
+#env.SetDefault(GAMESLIB = objFiles)
+
 Return('libFiles') 

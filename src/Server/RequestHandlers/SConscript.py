@@ -13,7 +13,9 @@ objFiles = env.Object(srcFiles)
 # Unit tests
 Import('testEnv')
 # Add file with unit tests
-testEnv.addUnitTest(['test/RequestHandlerFactoryTest.cpp'] + objFiles)
+testEnv.addUnitTest(['test/RequestHandlerFactoryTest.cpp'] + objFiles + env['GAMESLIB'] + env['CONNECTIONLIB'])
+print(objFiles + env['GAMESLIB'] + env['CONNECTIONLIB'])
+
 
 # Get the name of current directory
 dirPath = os.getcwd()
