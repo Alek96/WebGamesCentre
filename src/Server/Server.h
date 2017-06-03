@@ -19,12 +19,12 @@ protected:
 		//Load default configuration files, if present. The config file(s) name shall be
 		//the same as the executable's name.
 		loadConfiguration();
-		ServerApplication::initialize(self);
+		Poco::Util::ServerApplication::initialize(self);
 	}
 
 	void uninitialize()
 	{
-		ServerApplication::uninitialize();
+		Poco::Util::ServerApplication::uninitialize();
 	}
 
 	int main(const std::vector<std::string>& args);
