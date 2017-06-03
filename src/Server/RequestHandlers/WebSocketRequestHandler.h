@@ -10,7 +10,7 @@
 #include "Poco/Util/Application.h"
 #include "Poco/Logger.h"
 
-/** Serves the requested page's resource. */
+/** Accepts connection via WebSocket protocol. */
 class WebSocketRequestHandler : public Poco::Net::HTTPRequestHandler
 {
 public:

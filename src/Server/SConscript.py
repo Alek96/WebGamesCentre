@@ -8,6 +8,9 @@ Import('env')
 #Run SConscript files
 libFiles = SConscript(Split('''
 	RequestHandlers/SConscript.py
+    Games/SConscript.py
+    Player/SConscript.py
+    Connection/SConscript.py
 	'''))
 
 #Load and Compile main
