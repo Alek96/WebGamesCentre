@@ -13,11 +13,12 @@ public:
     static std::string writeToSocket(Poco::Net::WebSocket &webSocket);
     //static void sendPing(Poco::Net::WebSocket &webSocket);
     static void performHeartbeat(Poco::Net::WebSocket &webSocket);
+    static void close(Poco::Net::WebSocket &webSocket);
 
     static const std::size_t MAX_WS_FRAME_LENGTH = 1024;
 
 private:
-    static Poco::Logger &logger_;
+    //static Poco::Logger &logger_;
 };
 
 

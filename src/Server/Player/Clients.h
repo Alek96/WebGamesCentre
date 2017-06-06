@@ -19,7 +19,7 @@ private:
     Clients& operator=(const Clients&) = delete;
 
     std::map<std::string, Poco::SharedPtr<Poco::Net::WebSocket> > clientsWebSocketMap_;
-    static std::mutex mutex_;
+    mutable /*static*/ std::mutex mutex_;
 };
 
 

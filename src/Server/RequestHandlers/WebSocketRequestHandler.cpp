@@ -24,6 +24,7 @@ void WebSocketRequestHandler::handleRequest(Poco::Net::HTTPServerRequest& reques
         // Clients - vector/set/map of Client structures ?
         Client newPlayer("player1", wsPtr);
         Lobby::getInstance().addPlayerToThisStage(newPlayer);
+        poco_information(logger_, "Added new player to lobby.");
 	}
 	catch (Poco::Net::WebSocketException &ex)
 	{
