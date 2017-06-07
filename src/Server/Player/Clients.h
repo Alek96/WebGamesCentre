@@ -1,5 +1,5 @@
-#ifndef CLIENTS__
-#define CLIENTS__
+#ifndef WEBGAMESCENTRE_CLIENTS_H
+#define WEBGAMESCENTRE_CLIENTS_H
 
 #include "Poco/Net/WebSocket.h"
 #include <mutex>
@@ -23,4 +23,4 @@ private:
 };
 
 
-#endif //CLIENTS__
+#endif //WEBGAMESCENTRE_CLIENTS_H

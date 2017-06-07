@@ -2,8 +2,8 @@
  * WebGamesCentre Server
 */
 
-#ifndef SERVER__
-#define SERVER__
+#ifndef WEBGAMESCENTRE_SERVER_H
+#define WEBGAMESCENTRE_SERVER_H
 
 #include "Poco/Util/ServerApplication.h"
 
@@ -33,4 +33,4 @@ private:
 	Poco::Logger& logger_;
 };
 
-#endif //SERVER__
+#endif //WEBGAMESCENTRE_SERVER_H

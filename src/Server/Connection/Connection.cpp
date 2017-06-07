@@ -44,11 +44,9 @@ std::string Connection::readFromSocket(Poco::Net::WebSocket &webSocket)
     }
     else if ((flags & WebSocket::FRAME_OP_BITMASK) == WebSocket::FRAME_OP_PONG)
     {
-        /*// TODO match to a previously sent Ping frame (by the Server), if any
+        /*// match to a previously sent Ping frame (by the Server), if any
         //		Upon receipt of a Ping frame, an endpoint MUST send a Pong frame in
         //		response, unless it already received a Close frame.
-
-        // TODO check payload equality to the corresponding Ping frame ?
 
         // no response needed
         buffer[n] = '\0';
@@ -129,7 +127,7 @@ void Connection::close(Poco::Net::WebSocket &webSocket)
     // https://tools.ietf.org/html/rfc6455#section-5.5.1
     // Only if the Server did not previously send a Close frame!
 
-    // TODO state with received frame must be added :/
+    // TODO state with received frame must be added
 
     /*webSocket.sendFrame(buffer, n, flags);
 
@@ -139,7 +137,7 @@ void Connection::close(Poco::Net::WebSocket &webSocket)
     // RFC "MAY" key word: https://tools.ietf.org/html/rfc2119#section-5
     if (n >= 2)
     {
-        // status code is in network byte order --> needed conversion? CHECK
+        // status code is in network byte order
 
         //Poco::UInt16 statusCode = reinterpret_cast<unsigned short>(buffer);
         Poco::UInt16 statusCode = buffer[0] << 8 | buffer[1];	// BROKEN, TODO repair

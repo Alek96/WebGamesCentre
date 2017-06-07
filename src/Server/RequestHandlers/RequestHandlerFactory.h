@@ -3,8 +3,8 @@
 *
 */
 
-#ifndef REQUEST_HANDLER_FACTORY__
-#define REQUEST_HANDLER_FACTORY__
+#ifndef WEBGAMESCENTRE_REQUEST_HANDLER_FACTORY_H
+#define WEBGAMESCENTRE_REQUEST_HANDLER_FACTORY_H
 
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
 #include "Poco/Util/Application.h"
@@ -29,4 +29,4 @@ private:
 	Poco::Logger& logger_;
 };
 
-#endif //REQUEST_HANDLER_FACTORY__
+#endif //WEBGAMESCENTRE_REQUEST_HANDLER_FACTORY_H

@@ -8,7 +8,7 @@
 class ConnectionHeartbeatPingException : public std::exception
 {
 public:
-    const char *what() const override
+    virtual const char *what() const noexcept override
     {
         return "WebSocket PING frame sent by client. Must send back PONG frame.";
     }

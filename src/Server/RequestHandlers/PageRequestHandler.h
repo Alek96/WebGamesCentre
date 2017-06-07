@@ -3,8 +3,8 @@
 *
 */
 
-#ifndef PAGE_REQUEST_HANDLER__
-#define PAGE_REQUEST_HANDLER__
+#ifndef WEBGAMESCENTRE_PAGE_REQUEST_HANDLER_H
+#define WEBGAMESCENTRE_PAGE_REQUEST_HANDLER_H
 //or: #pragma once
 
 #include "Poco/Net/HTTPRequestHandler.h"
@@ -36,4 +36,4 @@ private:
 	Poco::Logger& logger_;
 };
 
-#endif //PAGE_REQUEST_HANDLER__
+#endif //WEBGAMESCENTRE_PAGE_REQUEST_HANDLER_H

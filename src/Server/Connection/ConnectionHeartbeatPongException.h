@@ -8,7 +8,7 @@
 class ConnectionHeartbeatPongException : public std::exception
 {
 public:
-    const char *what() const override
+    virtual const char *what() const noexcept override
     {
         return "WebSocket PONG frame sent by client. No response is anticipated.";
     }

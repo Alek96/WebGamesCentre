@@ -11,9 +11,7 @@ using Poco::Net::ReadableNotification;
 using Poco::Net::WebSocket;
 
 void LobbyEventHandler::handleSocketReadableEvent(const LobbyEventHandler::ReadableNotificationPtr &notification) {
-    //if(dynamic_cast<ReadableNotification*>(notification.get()))
-    //{
-        // can now read from the socket without blocking
+    // can now read from the socket without blocking
     poco_information(Poco::Util::Application::instance().logger(), "LobbyHandler handleReadableEvent.");
     WebSocket ws = notification->socket();
     try
@@ -25,10 +23,7 @@ void LobbyEventHandler::handleSocketReadableEvent(const LobbyEventHandler::Reada
         Connection::close(ws);
         lobby_.removePlayerFromThisStage(ws);
         //if flag CLOSE or (0-length-payload)(?) -> client disconnected
-        //TODO remove from clients collection
+        //remove from clients collection
         //unregister all eventHandlers for this socket
     }
-
-
-    //}
 }
