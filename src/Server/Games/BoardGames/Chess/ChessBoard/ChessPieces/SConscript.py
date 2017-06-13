@@ -6,19 +6,19 @@ import os
 
 Import('env')
 
-# Load and Compile all cpp file
+# Load and Compile all *.cpp file
 srcFiles = Glob('*.cpp')
 objFiles = env.Object(srcFiles)
 
 # Unit tests
 Import('testEnv')
 # Add file with unit tests
-testEnv.addUnitTest(['test/RequestHandlerFactoryTest.cpp'] + objFiles + env['GAMESLIB'] + env['CONNECTIONLIB'] ) #+ env['CONNECTIONLIB'] + env['PLAYERLIB']
+testEnv.addUnitTest(['test/ChessPiecesTest.cpp'] + objFiles)
 
-# Get the name of current directory
+# Get the name of current directory, which will be the default name for the library
 dirPath = os.getcwd()
 dirName = os.path.basename(dirPath)
 
-# Make new library
+# Rename the new library if you do not want a default name
 libFiles = env.Library(dirName, objFiles)
-Return('libFiles') 
+Return('libFiles')

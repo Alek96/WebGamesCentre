@@ -6,6 +6,11 @@ import os
 
 Import('env')
 
+# Run SConscript files
+libFiles = SConscript(Split('''
+    BoardGames/SConscript.py
+	'''))
+
 # Load and Compile all cpp file
 srcFiles = Glob('*.cpp')
 objFiles = env.Object(srcFiles)
@@ -19,11 +24,11 @@ objFiles = env.Object(srcFiles)
 dirPath = os.getcwd()
 dirName = os.path.basename(dirPath)
 
-# Make new library
-libFiles = env.Library(dirName, objFiles)
+# Rename the new library if you do not want a default name
+libFiles = env.Library(dirName, objFiles + libFiles)
 
 # Add this librares to global values
-env.SetDefault(GAMESLIB = libFiles)
-#env.SetDefault(GAMESLIB = objFiles)
+#env.SetDefault(GAMESLIB = libFiles)
+env.SetDefault(GAMESLIB = objFiles)
 
-Return('libFiles') 
+Return('libFiles')
