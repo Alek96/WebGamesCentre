@@ -2,8 +2,8 @@
  * WebGamesCentre Server
 */
 
-#ifndef SERVER__
-#define SERVER__
+#ifndef WEBGAMESCENTRE_SERVER_H
+#define WEBGAMESCENTRE_SERVER_H
 
 #include "Poco/Util/ServerApplication.h"
 
@@ -19,12 +19,12 @@ protected:
 		//Load default configuration files, if present. The config file(s) name shall be
 		//the same as the executable's name.
 		loadConfiguration();
-		ServerApplication::initialize(self);
+		Poco::Util::ServerApplication::initialize(self);
 	}
 
 	void uninitialize()
 	{
-		ServerApplication::uninitialize();
+		Poco::Util::ServerApplication::uninitialize();
 	}
 
 	int main(const std::vector<std::string>& args);
@@ -33,4 +33,4 @@ private:
 	Poco::Logger& logger_;
 };
 
-#endif //SERVER__
+#endif //WEBGAMESCENTRE_SERVER_H

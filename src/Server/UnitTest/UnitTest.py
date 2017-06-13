@@ -77,7 +77,8 @@ def addUnitTest(env, target=[], source=[], *args, **kwargs):
 	if not target:
 		target = ['#bin/' + sourceBasicName[0]]
 
-	source.append( env['UTEST_MAIN_SRC'] )
+	#source.append( env['UTEST_MAIN_SRC'] )
+	source.insert(0, env['UTEST_MAIN_SRC'])
 	program = env.Program(target, source, *args, **kwargs)
 
 	utest = env.UnitTest(program)

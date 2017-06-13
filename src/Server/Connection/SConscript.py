@@ -11,9 +11,9 @@ srcFiles = Glob('*.cpp')
 objFiles = env.Object(srcFiles)
 
 # Unit tests
-Import('testEnv')
+#Import('testEnv')
 # Add file with unit tests
-testEnv.addUnitTest(['test/RequestHandlerFactoryTest.cpp'] + objFiles + env['GAMESLIB'] + env['CONNECTIONLIB'] ) #+ env['CONNECTIONLIB'] + env['PLAYERLIB']
+#testEnv.addUnitTest(['test/RequestHandlerFactoryTest.cpp'] + objFiles)
 
 # Get the name of current directory
 dirPath = os.getcwd()
@@ -21,4 +21,9 @@ dirName = os.path.basename(dirPath)
 
 # Make new library
 libFiles = env.Library(dirName, objFiles)
+
+# Add this librares to global values
+env.SetDefault(CONNECTIONLIB = libFiles)
+#env.SetDefault(CONNECTIONLIB = objFiles)
+
 Return('libFiles') 

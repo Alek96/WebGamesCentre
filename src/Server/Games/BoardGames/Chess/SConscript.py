@@ -8,9 +8,9 @@ Import('env')
 
 # Run SConscript files
 libFiles = SConscript(Split('''
-	Directory/SConscript.py
+	ChessBoard/SConscript.py
 	'''))
-
+	
 # Load and Compile all *.cpp file
 srcFiles = Glob('*.cpp')
 objFiles = env.Object(srcFiles)
@@ -18,9 +18,7 @@ objFiles = env.Object(srcFiles)
 # Unit tests
 Import('testEnv')
 # Add file with unit tests
-testEnv.addUnitTest(['test/...Test.cpp'] + objFiles)
-# or
-testEnv.addUnitTest(target = '#bin/...Test', source = ['test/...Test.cpp'] + objFiles)
+#testEnv.addUnitTest(['test/ChessTest.cpp'] + objFiles + env['BOARDGAMEOBJ'] + libFiles)
 
 # Get the name of current directory, which will be the default name for the library
 dirPath = os.getcwd()

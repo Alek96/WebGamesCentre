@@ -5,9 +5,12 @@ from SCons.Environment import Environment
 
 Import('env')
 
-#Run SConscript files
+# Run SConscript files
 libFiles = SConscript(Split('''
+    Games/SConscript.py
+    Connection/SConscript.py
 	RequestHandlers/SConscript.py
+    Player/SConscript.py
 	'''))
 
 #Load and Compile main

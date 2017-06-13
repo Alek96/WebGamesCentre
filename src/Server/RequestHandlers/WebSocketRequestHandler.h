@@ -3,14 +3,14 @@
 *
 */
 
-#ifndef WEBSOCKET_REQUEST_HANDLER__
-#define WEBSOCKET_REQUEST_HANDLER__
+#ifndef WEBGAMESCENTRE_WEBSOCKET_REQUEST_HANDLER_H
+#define WEBGAMESCENTRE_WEBSOCKET_REQUEST_HANDLER_H
 
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Util/Application.h"
 #include "Poco/Logger.h"
 
-/** Serves the requested page's resource. */
+/** Accepts connection via WebSocket protocol. */
 class WebSocketRequestHandler : public Poco::Net::HTTPRequestHandler
 {
 public:
@@ -23,4 +23,4 @@ private:
 	Poco::Logger& logger_;
 };
 
-#endif //WEBSOCKET_REQUEST_HANDLER__
+#endif //WEBGAMESCENTRE_WEBSOCKET_REQUEST_HANDLER_H
