@@ -15,7 +15,7 @@ public:
 	//ChessPiece* getBoard();
 
 	bool checkMove();
-	void move() throw (...);
+	void move();
 
 	ChessBoard _chessBoard;
 

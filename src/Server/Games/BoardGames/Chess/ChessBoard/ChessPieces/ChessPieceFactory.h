@@ -20,7 +20,7 @@ public:
 	typedef std::shared_ptr<ChessPiece> ChessPiecePtr;
 	typedef std::function<ChessPiecePtr()> createFunction;
 	bool registerChessPiece(std::string id, createFunction fun);
-	ChessPiecePtr create(std::string id) throw (...);
+	ChessPiecePtr create(std::string id);
 private:
 	typedef std::map < std::string, createFunction > Callbacks;
 	Callbacks callbacks_;

@@ -23,7 +23,7 @@ public:
 	~ChessBoard();
 
 	bool canMove(ChessBoardPosition positionA, ChessBoardPosition positionB);
-	void move(ChessBoardPosition positionA, ChessBoardPosition positionB) throw (...);
+	void move(ChessBoardPosition positionA, ChessBoardPosition positionB);
 
 	void setChessPiece(ChessPiecePtr chessPiece, ChessBoardPosition position);
 	ChessPiecePtr getChessPiece(ChessBoardPosition position);

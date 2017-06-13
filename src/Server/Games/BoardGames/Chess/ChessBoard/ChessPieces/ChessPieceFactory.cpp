@@ -11,7 +11,7 @@ bool ChessPieceFactrory::registerChessPiece(std::string id, createFunction fun)
 		return false;
 }
 
-std::shared_ptr<ChessPiece> ChessPieceFactrory::create(std::string id) throw (...)
+std::shared_ptr<ChessPiece> ChessPieceFactrory::create(std::string id)
 {
 	Callbacks::const_iterator it = callbacks_.find(id);
 	if (it == callbacks_.end()) {

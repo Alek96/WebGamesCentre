@@ -44,7 +44,7 @@ bool ChessBoard::canMove(ChessBoardPosition positionA, ChessBoardPosition positi
 	return true;
 }
 
-void ChessBoard::move(ChessBoardPosition positionA, ChessBoardPosition positionB) throw(...)
+void ChessBoard::move(ChessBoardPosition positionA, ChessBoardPosition positionB)
 {
 	if (!canMove(positionA, positionB))
 		throw bad_move();
